@@ -1,0 +1,17 @@
+import streamlit as st
+import matplotlib.pyplot as plt
+
+st.title("5-HT & Dopamine Crosstalk Simulator")
+
+serotonin = st.slider("5-HT₁A Activation", 0.0, 1.0)
+dopamine = st.slider("D₁ Activation", 0.0, 1.0)
+time = st.selectbox("Exposure Duration", ["Acute", "Chronic"])
+
+cAMP, CREB = simulate_pathway(serotonin, dopamine, time)
+
+st.write("Predicted cAMP Level:", cAMP)
+st.write("Predicted CREB Activation:", CREB)
+
+fig, ax = plt.subplots()
+ax.bar(["cAMP", "CREB"], [cAMP, CREB])
+st.pyplot(fig)
